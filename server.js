@@ -8,7 +8,7 @@ const employees = require("./model");
 const router = express.Router();
 
 //database connection
-var uri = "mongodb://localhost:27017/details";
+var uri = "mongodb://192.168.1.6:27017/details";
 
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
 
