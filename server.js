@@ -42,6 +42,7 @@ var data = [
 employees.insertMany(data, function(err, result) {
   if (err) {
     res.send(err);
+<<<<<<< HEAD
     } else {
     res.send(result);
 
