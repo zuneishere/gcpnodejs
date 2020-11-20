@@ -42,21 +42,25 @@ var data = [
 employees.insertMany(data, function(err, result) {
   if (err) {
     res.send(err);
+    console.log('Data insert failure');
   } else {
     res.send(result);
+    console.log('Data inserted succesfully);
   }
 });
 router.route("/fetchdata").get(function(req, res) {
   employees.find({}, function(err, result) {
     if (err) {
       res.send(err);
+      console.log('Data fetch failure- Dennis')
     } else {
       res.send(result);
     }
   });
 });
-
-
+router.route("/test").get(function(req, res) {
+  res.send('Hello World!')
+});
 });
 
 
