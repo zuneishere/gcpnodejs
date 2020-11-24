@@ -22,7 +22,7 @@ spec:
     matchLabels:
       app: amnodejs
       environment: production
-  replicas: 3
+  replicas: 1
   serviceName: amnodejs-svc
   template:
     metadata:
@@ -36,17 +36,17 @@ spec:
         resources:
           limits:
             memory: "128Mi"
-            cpu: "500m"
+            cpu: "100m"
         env:
             - name: MONGO_HOSTNAME
               valueFrom:
                 secretKeyRef:
-                  name: mongo_host
+                  name: mongo-host
                   key: mongo_hostname
             - name: MONGO_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: mongo_user
+                  name: mongo-user
                   key: mongo_username
             - name: MONGO_PASSWORD
               valueFrom:
@@ -57,25 +57,25 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mongo-prt
-                  key: mongo-port
+                  key: mongo_port
 
         ports:
         - containerPort: 4000
-        readinessProbe:
-          httpGet:
-            path: /test
-            scheme: HTTP
-            port: 4000
-          initialDelaySeconds: 15
-          periodSeconds: 10
-          timeoutSeconds: 5
-          successThreshold: 2
-          failureThreshold: 5
-        livenessProbe:
-          httpGet:
-            path: /test
-            port: 4000
-            scheme: HTTP
-          initialDelaySeconds: 30
+        # readinessProbe:
+        #   httpGet:
+        #     path: /test
+        #     scheme: HTTP
+        #     port: 4000
+        #   initialDelaySeconds: 15
+        #   periodSeconds: 10
+        #   timeoutSeconds: 5
+        #   successThreshold: 2
+        #   failureThreshold: 5
+        # livenessProbe:
+        #   httpGet:
+        #     path: /test
+        #     port: 4000
+        #     scheme: HTTP
+        #   initialDelaySeconds: 30
 
 
