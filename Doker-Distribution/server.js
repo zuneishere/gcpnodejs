@@ -16,8 +16,19 @@ const {
 
 //database connection
 //var uri = "mongodb://dennis:startup#85@host:27017/details";
+mongoose.connect(
+  "mongodb://localhost:27017/details", 
+   {
+     useNewUrlParser: true,
+     useUnifiedTopology: true,
+     auth: {
+       user: "dennis",
+       password: "startup#85"
+     }
+   }
+);
 
-var uri = `${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/details`;
+//var uri = `${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/details`;
 
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
 
