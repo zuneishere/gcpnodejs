@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+
+metadata:
+  name: amnodejs-ingress
+  namespace: default
+  annotations:
+      kubernetes.io/ingress.global-static-ip-name: amnodejs-ip
+      networking.gke.io/managed-certificates: amnodejs.com-certificate
+
+spec:
+    backend:
+      serviceName: amnodejs-svc
+      servicePort: 80
+    rules: 
+    - host: amnodejs.com
+      http:
+        paths:
+        - backend:
+            serviceName: amnodejs-svc
+            servicePort: 80  
