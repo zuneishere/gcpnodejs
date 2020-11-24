@@ -37,6 +37,28 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        env:
+            - name: MONGO_HOSTNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo_host
+                  key: mongo_hostname
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo_user
+                  key: mongo_username
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-pass
+                  key: mongo_password
+            - name: MONGO_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-prt
+                  key: mongo-port
+
         ports:
         - containerPort: 4000
         readinessProbe:

@@ -7,8 +7,17 @@ const mongoose = require("mongoose");
 const employees = require("./model");
 const router = express.Router();
 
+const {
+  MONGO_USERNAME,
+  MONGO_PASSWORD,
+  MONGO_HOSTNAME,
+  MONGO_PORT
+} = process.env;
+
 //database connection
-var uri = "mongodb://dennis:startup#85@host:27017/details";
+//var uri = "mongodb://dennis:startup#85@host:27017/details";
+
+var uri = `${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/details`;
 
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
 
