@@ -5,8 +5,8 @@ metadata:
   name: amnodejs-ingress
   namespace: default
   annotations:
-#      kubernetes.io/ingress.global-static-ip-name: amnodejs-ip
-#     networking.gke.io/managed-certificates: amnodejs.com-certificate
+     kubernetes.io/ingress.global-static-ip-name: amnodejs-ip
+     networking.gke.io/managed-certificates: amnodejs.cf-certificate
 
 spec:
     backend:

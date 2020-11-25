@@ -1,7 +1,7 @@
 apiVersion: networking.gke.io/v1beta1
 kind: ManagedCertificate
 metadata:
-  name: amnodejs.com-certificate
+  name: amnodejs.cf-certificate
 spec:
   domains:
-  - amnodejs.com
+  - amnodejs.cf
