@@ -30,6 +30,9 @@ connection.once("open", function() {
 //start router- any link starting with '/' will be captured by the router
 //
 app.use("/", router);
+router.route("/test").get(function(req, res) {
+    res.send('Hello World!')
+  });
 router.route("/insertdata").post(function(req, res) {
 var data = [
   {
@@ -67,9 +70,7 @@ router.route("/fetchdata").get(function(req, res) {
     }
   });
 });
-router.route("/test").get(function(req, res) {
-  res.send('Hello World!')
-});
+
 });
 
 

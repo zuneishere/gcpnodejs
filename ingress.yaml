@@ -12,10 +12,3 @@ spec:
     backend:
       serviceName: amnodejs-svc
       servicePort: 80
-    rules: 
-    - host: amnodejs.com
-      http:
-        paths:
-        - backend:
-            serviceName: amnodejs-svc
-            servicePort: 80  
