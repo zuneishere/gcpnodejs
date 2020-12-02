@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: amnodejs
-        image: gcr.io/bionic-upgrade-295812/amnodejs:
+        image: gcr.io/bionic-upgrade-295812/amnodejs:COMMIT_SHA
         resources:
           limits:
             memory: "128Mi"
