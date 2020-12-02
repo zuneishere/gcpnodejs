@@ -2,7 +2,7 @@ FROM node:12
 
 LABEL Maintainer="Dennis"
 LABEL MAINTAINER.EMAIL="dennis@admod.com"
-LABEL IMAGE="gcr.io/buoyant-genre-251705/amnodejs:4.0"
+LABEL IMAGE="gcr.io/bionic-upgrade-295812/amnodejs:4.0"
 
 WORKDIR /usr/src/app
 # Install app dependencies

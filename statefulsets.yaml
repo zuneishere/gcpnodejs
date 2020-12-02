@@ -22,7 +22,7 @@ spec:
     matchLabels:
       app: amnodejs
       environment: production
-  replicas: 1
+  replicas: 2
   serviceName: amnodejs-svc
   template:
     metadata:
@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: amnodejs
-        image: gcr.io/buoyant-genre-251705/amnodejs:3.0
+        image: gcr.io/bionic-upgrade-295812/amnodejs:4.0
         resources:
           limits:
             memory: "128Mi"
