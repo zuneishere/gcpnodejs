@@ -31,7 +31,7 @@ connection.once("open", function() {
 //
 app.use("/", router);
 router.route("/test").get(function(req, res) {
-    res.send('Hello World!')
+    res.send('Hello World - Cloud build Run!')
   });
 router.route("/insertdata").post(function(req, res) {
 var data = [
