@@ -32,7 +32,7 @@ steps:
   args:
   - 'apply'
   - '-f'
-  - 'statefulsets.yaml'
+  - './statefulsets.yaml'
   env:
   - 'CLOUDSDK_COMPUTE_REGION=us-central1'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'
