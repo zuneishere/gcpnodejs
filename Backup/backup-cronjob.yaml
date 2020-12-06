@@ -1,0 +1,58 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+    name: amnodejs-backups
+spec:
+   schedule: "30 6 * * *"
+   concurrencyPolicy: Forbid
+   jobTemplate: 
+     spec:
+       template:
+         spec:
+           initContainers:
+           - name: amnodejs-backups
+             image: bitnami/mongodb:4.4.2-debian-10-r0
+             args:
+             - /bin/sh
+             - -c 
+             - mongodump --uri=${MONGO_URI} --readPreference=secondary --out /mnt/backups/$(date +%H-%d-backup)/
+             env:
+             - name: MONGO_URI
+               valueFrom:
+                secretKeyRef:
+                  name: mongo-uri
+                  key: mongo_uri
+             volumeMounts:
+               - name: backups
+                 mountPath: /mnt/backups/
+          
+           containers:
+           - name: gcloud
+             image: google/cloud-sdk:alpine
+             command:
+              - sh
+              - -c
+              - echo "Sleep 60 seconds" &&
+                sleep 60s &&
+                echo "Use the new service account" &&
+                gcloud auth activate-service-account --key-file /tmp/amnodejs-backup-IAM-SA.json &&
+                echo "Run the backup script" &&
+                sh /mnt/scripts/backup-script.sh
+             volumeMounts:
+              - name: backups
+                mountPath: /mnt/backups  
+              - name: backup-script
+                mountPath: /mnt/scripts
+              - name: service-account
+                mountPath: /tmp
+           restartPolicy: Never
+           volumes:
+              - name: backups
+                emptyDir: {}
+              - name: backup-script
+                configMap:
+                  name: amnodejs-backup-script
+              - name: service-account
+                secret:
+                   secretName: amnodejs-gcs-iam-sa
+          

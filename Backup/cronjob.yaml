@@ -1,0 +1,24 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cronjob-test
+spec:
+  schedule: "* */6 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cronjob1
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - date; echo 1st container sleeping....; sleep 10s; echo exiting...;
+            - name: cronjob2
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - date; echo 2nd sleeping....; sleep 10s; echo exiting...;
+          restartPolicy: Never
