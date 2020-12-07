@@ -1,0 +1,12 @@
+
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: my-bsc-backendconfig
+spec:
+  timeoutSec: 400
+  connectionDraining:
+    drainingTimeoutSec: 400
+  sessionAffinity:
+    affinityType: "GENERATED_COOKIE"
+    affinityCookieTtlSec: 86400
