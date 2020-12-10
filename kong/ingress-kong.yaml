@@ -1,0 +1,25 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: proxy-from-k8s-to-ws1
+  namespace: kong
+  annotations:
+    konghq.com/strip-path: "false"
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: kong
+spec:
+  tls:
+  - secretName: api-amnodejs-cf
+    hosts:
+    - api.amnodejs.cf 
+
+  rules:
+  - host: api.amnodejs.cf
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: proxy-to-api
+          servicePort: 80

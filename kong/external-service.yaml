@@ -1,0 +1,12 @@
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: proxy-to-api
+  namespace: kong
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+  type: ExternalName
+  externalName: amnodejs.cf

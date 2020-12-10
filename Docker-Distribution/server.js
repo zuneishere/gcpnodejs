@@ -30,8 +30,11 @@ connection.once("open", function() {
 //start router- any link starting with '/' will be captured by the router
 //
 app.use("/", router);
+router.route("/").get(function(req, res) {
+  res.send('Hello World - Cloud build Run Home Page!')
+});
 router.route("/test").get(function(req, res) {
-    res.send('Hello World - Cloud build Run!')
+    res.send('Hello World - Cloud build Run Test Page!')
   });
 router.route("/insertdata").post(function(req, res) {
 var data = [
