@@ -18,7 +18,23 @@ const {
 //var uri = "mongodb://dennis:startup#85@host:27017/details";
 //var uri = "mongodb://dennis:startup85@mongodb-release-headless:27017/details";
 var uri = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/details`;
-
+var data = [
+  {
+    name: "John",
+    age: 21,
+    location: "New York"
+  },
+  {
+    name: "Smith",
+    age: 27,
+    location: "Texas"
+  },
+  {
+    name: "Lisa",
+    age: 23,
+    location: "Chicago"
+  }
+];
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
 
 const connection = mongoose.connection;
@@ -37,23 +53,7 @@ router.route("/test").get(function(req, res) {
     res.send('Hello World - Cloud build Run Test Page!')
   });
 router.route("/insertdata").post(function(req, res) {
-var data = [
-  {
-    name: "John",
-    age: 21,
-    location: "New York"
-  },
-  {
-    name: "Smith",
-    age: 27,
-    location: "Texas"
-  },
-  {
-    name: "Lisa",
-    age: 23,
-    location: "Chicago"
-  }
-];
+
 employees.insertMany(data, function(err, result) {
   if (err) {
     res.send(err);

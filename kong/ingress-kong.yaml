@@ -5,6 +5,7 @@ metadata:
   name: proxy-from-k8s-to-ws1
   namespace: kong
   annotations:
+    konghq.com/plugins: amnodejs-api-auth
     konghq.com/strip-path: "false"
     kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: letsencrypt-prod
