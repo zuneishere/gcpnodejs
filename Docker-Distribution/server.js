@@ -14,8 +14,20 @@ const {
   MONGO_PORT
 } = process.env;
 
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+  autoIndex: false, // Don't build indexes
+  poolSize: 10, // Maintain up to 10 socket connections
+  serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+  socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+  family: 4 // Use IPv4, skip trying IPv6
+};
+
 //database connection
-//var uri = "mongodb://dennis:startup#85@host:27017/details";
+//var uri = "mongodb://dennis:startup85@localhost:27017/details";
 //var uri = "mongodb://dennis:startup85@mongodb-release-headless:27017/details";
 var uri = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/details`;
 var data = [
@@ -35,9 +47,12 @@ var data = [
     location: "Chicago"
   }
 ];
-mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect(uri, options);
 
 const connection = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 connection.once("open", function() {
   console.log("MongoDB database connection established successfully at port 27017");
@@ -63,6 +78,8 @@ employees.insertMany(data, function(err, result) {
 
   }
 });
+});
+
 router.route("/fetchdata").get(function(req, res) {
   employees.find({}, function(err, result) {
     if (err) {
@@ -70,14 +87,14 @@ router.route("/fetchdata").get(function(req, res) {
       console.log('Data fetch failure- Dennis')
     } else {
       res.send(result);
+      console.log('Data fetch success- Dennis')
     }
   });
 });
 
-});
+
 
 
 app.listen(port, function() {
   console.log("Server is running on Port: " + port);
 });
-
