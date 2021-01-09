@@ -39,9 +39,13 @@ spec:
       - name: amnodejs
         image: gcr.io/bionic-upgrade-295812/amnodejs:COMMIT_SHA
         resources:
-          limits:
+          requests:
             memory: "128Mi"
             cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "150m"
+
         env:
             - name: MONGO_HOSTNAME
               valueFrom:
